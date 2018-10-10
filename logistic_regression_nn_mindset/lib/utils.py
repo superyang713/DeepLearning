@@ -1,6 +1,7 @@
 """
 helper functions for Logistic Regression.
 """
+
 # Author: Yang Dai <daiy@mit.edu>
 
 
