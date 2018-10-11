@@ -1,5 +1,5 @@
 """
-helper functions for Logistic Regression.
+helper functions for One Layer Neural Network.
 """
 
 # Author: Yang Dai <daiy@mit.edu>
