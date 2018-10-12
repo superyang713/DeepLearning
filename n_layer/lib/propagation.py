@@ -51,6 +51,37 @@ def linear_activation(A_pre, W, b, activation):
     return A, cache
 
 
+def linear_activation_backward(dA, cache, activation):
+    """
+    Implement the backward propagation for the LINEAR->ACTIVATION layer
+
+    Parameters:
+    ----------
+    dA : post-activation gradient for current layer l
+    cache : namedtuple of (linear_cache, activation_cache) we store during \
+        forward propagation for computing backward propagation efficiently
+    activation : the activation to be used in this layer, stored as a text \
+        string: "sigmoid" or "relu"
+
+    Returns:
+    -------
+    dA_prev : Gradient of the cost with respect to the activation
+    dW : Gradient of the cost with respect to W (current layer l)
+    db : Gradient of the cost with respect to b (current layer l)
+    """
+    linear_cache, activation_cache = cache
+
+    if activation == 'relu':
+        dZ = relu_backward(dA, activation_cache)
+        dA_pre, dW, db = linear_backward(dZ, linear_cache)
+
+    elif activation == 'sigmoid':
+        dZ = sigmoid_backward(dA, activation_cache)
+        dA_pre, dW, db = linear_backward(dZ, linear_cache)
+
+    return dA_pre, dW, db
+
+
 def linear(A_pre, W, b):
     """
     Implement the linear part of a layer's forward propagation.
@@ -124,6 +155,38 @@ def relu(Z):
     return A, activation_cache
 
 
+def linear_backward(dZ, linear_cache):
+    """
+    Implement the linear portion of backward propagation.
+
+    Parameters:
+    ----------
+    dZ : Gradient of the cost with respect to the linear output.
+    cache : namedtuple of values (A_prev, W, b) from the forward propagation \
+        in the current layer
+
+    Returns:
+    dA_prev : Gradient of the cost with respect to the activation (of the \
+        previous layer l-1), same shape as A_prev
+    dW : Gradient of the cost with respect to W (current layer l), same shape \
+        as W
+    db : Gradient of the cost with respect to b (current layer l), same shape \
+        as b
+    """
+    A_pre, W, b = linear_cache
+    n_samples = A_pre.shape[1]
+
+    dW = 1 / n_samples * np.dot(dZ, A_pre.T)
+    db = 1 / n_samples * np.sum(dZ, axis=1, keepdims=True)
+    dA_pre = np.dot(W.T, dZ)
+
+    assert (dA_pre.shape == A_pre.shape)
+    assert (dW.shape == W.shape)
+    assert (db.shape == b.shape)
+
+    return dA_pre, dW, db
+
+
 def sigmoid_backward(dA, activation_cache):
     """
     Implement the backward propagation for a single SIGMOID unit.
@@ -164,7 +227,6 @@ def relu_backward(dA, activation_cache):
 
     Z = activation_cache.Z
 
-    # just converting dz to a correct object.
     dZ = np.array(dA, copy=True)
 
     # When z <= 0, you should set dz to 0 as well.
