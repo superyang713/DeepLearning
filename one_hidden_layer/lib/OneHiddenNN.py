@@ -152,8 +152,7 @@ class OneHiddenLayerClassifier:
         y : true labels vector of shape (1, n_samples)
 
         Returns:
-        A2 -- The sigmoid output of the second activation
-        cache -- a dictionary containing "Z1", "A1", "Z2" and "A2"
+        cost : cross-entropy cost
         """
         n_samples = y.shape[1]
         cost = -1 / n_samples * (
