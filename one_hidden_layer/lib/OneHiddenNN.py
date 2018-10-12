@@ -43,6 +43,17 @@ class OneHiddenLayerClassifier:
         self.costs = []
 
     def fit(self, X, y):
+        """
+        Train the model.
+
+        Parameters:
+        ----------
+        X : input data of size (n_samples, n_features)
+        y : true labels vector of shape (n_samples)
+
+        Returns:
+        -------
+        """
         X = reshape_X(X)
         y = reshape_y(y)
         n_features, n_samples = X.shape
