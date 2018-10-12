@@ -150,7 +150,6 @@ class OneHiddenLayerClassifier:
         output : The sigmoid output of the second activation, although in \
             this case is A2.
         y : true labels vector of shape (1, n_samples)
-        self.params : dict containing all parameters in the network.
 
         Returns:
         A2 -- The sigmoid output of the second activation
