@@ -12,10 +12,10 @@ Important notes:
     5. Internally, X is converted to (n_features, n_samples), and y is \
         converted to (1, n_samples)
     6. y_predict shape is (n_samples,)
-    5. W shape is (n_neurons, n_features)
-    6. b is (n_neurons, 1)
-    7. Therefore, internally,  Z = WX + b
-    9. Optimization is done by batch gradient descent.
+    7. W shape is (n_neurons, n_features)
+    8. b is (n_neurons, 1)
+    9. Therefore, internally,  Z = WX + b
+    10. Optimization is done by batch gradient descent.
 """
 
 # Author: Yang Dai <daiy@mit.edu>
@@ -93,7 +93,6 @@ class OneHiddenLayerClassifier:
             W2 -- weight matrix of shape (n_output, n_hidden1)
             b2 -- bias vector of shape (self.n_output, 1)
         """
-        np.random.seed(2)  # For debug
 
         W1 = np.random.randn(self.n_hidden1, n_features) * 0.01
         b1 = np.zeros((self.n_hidden1, 1))
