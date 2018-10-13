@@ -78,7 +78,7 @@ class NeuralNetworkClassifier:
             AL = self._forward_propagate(X)
             cost = self._compute_cost(AL, y)
             self.costs.append(cost)
-            self._backward_progagate(AL, X, y)
+            self._backward_progagate(AL, y)
             self._update_parameters()
 
     def predict(self, X):
@@ -193,10 +193,10 @@ class NeuralNetworkClassifier:
             propagation.
         """
 
-        dAL = - np.divide(y, AL) - np.divide(1 - y, 1 - AL)
+        dAL = - (np.divide(y, AL) - np.divide(1 - y, 1 - AL))
         return dAL
 
-    def _backward_progagate(self, AL, X,  y):
+    def _backward_progagate(self, AL, y):
         """
         Implement the backward propagation.
 
@@ -204,7 +204,6 @@ class NeuralNetworkClassifier:
         ----------
         AL : numpy array of shape (1, n_samples)
             probability vector corresponding to the label predictions.
-        X : input data of size (n_features, n_samples)
         y : true labels vector of shape (1, n_samples)
 
         Returns:
@@ -212,15 +211,15 @@ class NeuralNetworkClassifier:
         """
         dAL = self._compute_dAL(AL, y)
 
-        sigmoid_cache = self.caches[self.L - 1]
+        sigmoid_cache = self.caches[self.L - 2]
 
-        (self.grads["dA" + str(self.L)],
-         self.grads["dW" + str(self.L)],
-         self.grads["db" + str(self.L)]) = linear_activation_backward(
+        (self.grads["dA" + str(self.L - 1)],
+         self.grads["dW" + str(self.L - 1)],
+         self.grads["db" + str(self.L - 1)]) = linear_activation_backward(
              dAL, sigmoid_cache, "sigmoid"
          )
 
-        for l in reversed(range(self.L - 1)):
+        for l in reversed(range(self.L - 2)):
             current_cache = self.caches[l]
 
             (self.grads["dA" + str(l + 1)],
@@ -233,7 +232,7 @@ class NeuralNetworkClassifier:
         """
         Updates parameters using the gradient descent update rule.
         """
-        for l in range(1, self.L + 1):
+        for l in range(1, self.L):
             self.params['W' + str(l)] = self.params['W' + str(l)] - \
                 self.learning_rate * self.grads['dW' + str(l)]
             self.params['b' + str(l)] = self.params['b' + str(l)] - \

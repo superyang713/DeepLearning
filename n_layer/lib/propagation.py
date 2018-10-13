@@ -106,7 +106,7 @@ def linear(A_pre, W, b):
 
     Z = np.dot(W, A_pre) + b
     assert(Z.shape == (W.shape[0], A_pre.shape[1]))
-    linear_cache = Linear_cache(A_pre, W, b)
+    linear_cache = (A_pre, W, b)
 
     return Z, linear_cache
 
@@ -126,7 +126,7 @@ def sigmoid(Z):
     """
 
     A = 1 / (1 + np.exp(-Z))
-    activation_cache = Activation_cache(Z)
+    activation_cache = Z
 
     return A, activation_cache
 
@@ -150,7 +150,7 @@ def relu(Z):
 
     assert(A.shape == Z.shape)
 
-    activation_cache = Activation_cache(Z)
+    activation_cache = Z
 
     return A, activation_cache
 
@@ -201,7 +201,7 @@ def sigmoid_backward(dA, activation_cache):
     dZ : Gradient of the cost with respect to Z
     """
 
-    Z = activation_cache.Z
+    Z = activation_cache
 
     s = 1 / (1 + np.exp(-Z))
     dZ = dA * s * (1 - s)
@@ -225,7 +225,7 @@ def relu_backward(dA, activation_cache):
     dZ : Gradient of the cost with respect to Z
     """
 
-    Z = activation_cache.Z
+    Z = activation_cache
 
     dZ = np.array(dA, copy=True)
 
