@@ -211,7 +211,7 @@ class NeuralNetworkClassifier:
         """
         dAL = self._compute_dAL(AL, y)
 
-        sigmoid_cache = self.caches[self.L - 2]
+        sigmoid_cache = self.caches[-1]
 
         (self.grads["dA" + str(self.L - 1)],
          self.grads["dW" + str(self.L - 1)],
@@ -225,7 +225,7 @@ class NeuralNetworkClassifier:
             (self.grads["dA" + str(l + 1)],
              self.grads["dW" + str(l + 1)],
              self.grads["db" + str(l + 1)]) = linear_activation_backward(
-                self.grads['dA' + str(l+2)], current_cache, "relu"
+                self.grads['dA' + str(l + 2)], current_cache, "relu"
             )
 
     def _update_parameters(self):
@@ -237,3 +237,9 @@ class NeuralNetworkClassifier:
                 self.learning_rate * self.grads['dW' + str(l)]
             self.params['b' + str(l)] = self.params['b' + str(l)] - \
                 self.learning_rate * self.grads['db' + str(l)]
+
+    def get_accuracy(self, X, y):
+        y_predict = self.predict(X)
+        n_samples = X.shape[0]
+        accuracy = np.sum(y_predict == y) / n_samples
+        return accuracy
