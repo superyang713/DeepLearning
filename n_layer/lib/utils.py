@@ -23,30 +23,6 @@ def reshape_y(y):
     return y.reshape(1, -1)
 
 
-def load_planar_dataset():
-    np.random.seed(1)
-    n_samples = 400
-    n_samples_per_class = int(n_samples / 2)
-    n_rays = 4
-    dim = 2
-    X = np.zeros((n_samples, dim))
-    Y = np.zeros(n_samples)
-
-    for j in range(2):
-        ix = range(n_samples_per_class * j, n_samples_per_class * (j + 1))
-        theta = np.linspace(
-            j * 3.12, (j + 1) * 3.12, n_samples_per_class
-        ) + np.random.randn(n_samples_per_class) * 0.2
-        radius = (
-            n_rays * np.sin(4 * theta) +
-            np.random.randn(n_samples_per_class) * 0.2
-        )
-        X[ix] = np.c_[radius * np.sin(theta), radius * np.cos(theta)]
-        Y[ix] = j
-
-    return X, Y
-
-
 def load_dataset():
     train_dataset = h5py.File('datasets/train_catvnoncat.h5', "r")
     train_set_x_orig = np.array(train_dataset["train_set_x"][:])

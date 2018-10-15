@@ -51,8 +51,8 @@ class NeuralNetworkClassifier:
         self.L = len(self.layer_dims)
 
         self.costs = []
-        self.params = {}
         self.caches = []
+        self.params = {}
         self.grads = {}
 
     def fit(self, X, y):

@@ -1,6 +1,6 @@
-from network import NeuralNetworkClassifier
-from propagation import linear_activation
-from test import (
+from lib.network import NeuralNetworkClassifier
+from lib.propagation import linear_activation
+from lib.test import (
     linear_activation_forward_test_case, L_model_forward_test_case_2hidden,
     compute_cost_test_case, L_model_backward_test_case,
     print_grads, update_parameters_test_case
@@ -13,6 +13,7 @@ nn._init_params()
 parameters = nn.params
 
 print('-' * 50)
+print('init parameter')
 print("W1 = " + str(parameters["W1"]))
 print("b1 = " + str(parameters["b1"]))
 print("W2 = " + str(parameters["W2"]))
@@ -24,6 +25,7 @@ A, cache = linear_activation(
     A_prev, W, b, activation="sigmoid"
 )
 print('-' * 50)
+print('linear_activation')
 print("With sigmoid: A = " + str(A))
 
 A, linear_activation_cache = linear_activation(
@@ -35,11 +37,9 @@ print(cache)
 
 X, parameters = L_model_forward_test_case_2hidden()
 nn.L = len(parameters) // 2 + 1
-print(parameters)
+print('-' * 50)
 nn.params = parameters
 y_hat = nn._forward_propagate(X)
-print('-' * 50)
-print(y_hat.shape)
 print("y_hat = " + str(y_hat))
 print("Length of caches list = " + str(len(nn.caches)))
 

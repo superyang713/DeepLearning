@@ -9,8 +9,6 @@ import numpy as np
 from collections import namedtuple
 
 
-Linear_cache = namedtuple('Linear_cache', 'A_pre W b')
-Activation_cache = namedtuple('Activation_cache', 'Z')
 Cache = namedtuple('Cache', 'linear_cache activation_cache')
 
 
