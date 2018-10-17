@@ -106,10 +106,12 @@ class NeuralNetworkClassifier:
         """
 
         np.random.seed(3)
+
+        # He initialization
         for l in range(1, self.L):
             self.params['W' + str(l)] = np.random.randn(
                 self.layer_dims[l], self.layer_dims[l - 1]
-            ) * 0.01
+            ) * np.sqrt(2 / self.layer_dims[l - 1])
 
             self.params['b' + str(l)] = np.zeros((self.layer_dims[l], 1))
 
