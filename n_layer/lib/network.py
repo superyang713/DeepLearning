@@ -111,7 +111,7 @@ class NeuralNetworkClassifier:
         for l in range(1, self.L):
             self.params['W' + str(l)] = np.random.randn(
                 self.layer_dims[l], self.layer_dims[l - 1]
-            ) * np.sqrt(2 / self.layer_dims[l - 1])
+            ) / np.sqrt(self.layer_dims[l - 1])
 
             self.params['b' + str(l)] = np.zeros((self.layer_dims[l], 1))
 
@@ -167,13 +167,11 @@ class NeuralNetworkClassifier:
         cost : cross-entropy cost
         """
         n_samples = y.shape[1]
-        cost = -1 / n_samples * (
+        cost = -1. / n_samples * (
             np.dot(y, np.log(AL.T)) + np.dot(1 - y, np.log(1 - AL.T))
         )
 
-        cost = np.squeeze(cost).item()
-
-        assert(isinstance(cost, float))
+        cost = np.squeeze(cost)
 
         return cost
 
