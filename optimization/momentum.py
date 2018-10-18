@@ -7,9 +7,9 @@ momentum can reduce these oscillations.
 Momentum takes into account the past gradients to smooth out the update. We
 will store the 'direction' of the previous gradients in the variable v.
 Formally, this will be the exponentially weighted average of the gradient on
-previous steps. You can also think of v as the "velocity" of a ball rolling
-downhill, building up speed (and momentum) according to the direction of the
-gradient/slop of the hill.
+previous steps, or the moving average of the gradients. You can also think of v
+as the "velocity" of a ball rolling downhill, building up speed (and momentum)
+according to the direction of the gradient/slop of the hill.
 
 To apply momentum to the gradient descent, the velocity should be first
 initialized. During back propagation, the parameters will not be updated with
