@@ -10,3 +10,5 @@ geckodriver.log
 build/
 dist/
 .ipynb_checkpoints
+kaggle_original_data/
+data/
