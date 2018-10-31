@@ -80,6 +80,5 @@ history = model.fit_generator(
 )
 model.save('catas_and_dogs_small_1.h5')
 
-
-# Plot curves of loss and accuracy during training
+# Visualize loss and accuracy
 plot_loss_and_accuracy(history)
