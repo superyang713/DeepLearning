@@ -9,9 +9,6 @@ from utils import plot_loss_and_accuracy
 
 
 # Organize files into different folders
-original_dataset_dir = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), 'kaggle_original_data'
-)
 base_dir = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'data'
 )
@@ -19,15 +16,6 @@ base_dir = os.path.join(
 train_dir = os.path.join(base_dir, 'train')
 validation_dir = os.path.join(base_dir, 'validation')
 test_dir = os.path.join(base_dir, 'test')
-
-train_cats_dir = os.path.join(train_dir, 'cats')
-train_dogs_dir = os.path.join(train_dir, 'dogs')
-
-validation_cats_dir = os.path.join(validation_dir, 'cats')
-validation_dogs_dir = os.path.join(validation_dir, 'dogs')
-
-test_cats_dir = os.path.join(test_dir, 'cats')
-test_dogs_dir = os.path.join(test_dir, 'dogs')
 
 
 # Data preprocessing

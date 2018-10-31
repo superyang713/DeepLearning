@@ -1,7 +1,9 @@
 import os
 import shutil
 
+import numpy as np
 import matplotlib.pyplot as plt
+
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
@@ -57,6 +59,36 @@ def create_train_validation_test(
     print('total validation dog images:', len(os.listdir(validation_dogs_dir)))
     print('total test cat images:', len(os.listdir(test_cats_dir)))
     print('total test dog images:', len(os.listdir(test_dogs_dir)))
+
+
+def extract_features(conv_base, data_generator, n_samples):
+    """
+    Extract features from the images passed by the generator through the pre-
+    trained convolutional base model.
+
+    parameters:
+    ----------
+    conv_base:
+        pre-trained convolutional base.
+    data_generator:
+        generator that passes the mini-batches to the conv-base.
+    n_samples: int
+        number of samples in the data.
+    """
+    features = np.zeros(shape=(n_samples, 4, 4, 512))   # shape of VGG16 output
+    labels = np.zeros(shape=(n_samples,))
+    i = 0
+    for inputs_batch, labels_batch in data_generator:
+        batch_size = len(labels_batch)
+        features_batch = conv_base.predict(inputs_batch)
+
+        features[i * batch_size:(i + 1) * batch_size] = features_batch
+        labels[i * batch_size:(i + 1) * batch_size] = labels_batch
+
+        i += 1
+        if i * batch_size >= n_samples:
+            break
+    return features, labels
 
 
 def plot_loss_and_accuracy(history):
