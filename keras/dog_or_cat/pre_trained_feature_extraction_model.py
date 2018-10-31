@@ -96,6 +96,7 @@ history = model.fit(
     batch_size=20,
     validation_data=(validation_features, validation_labels),
 )
+model.save('catas_and_dogs_small_3.h5')
 
 # Visualize the performance
 plot_loss_and_accuracy(history)
