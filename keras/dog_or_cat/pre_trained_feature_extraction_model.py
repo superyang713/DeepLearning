@@ -60,8 +60,6 @@ conv_base = VGG16(
     input_shape=(150, 150, 3),
 )
 
-conv_base.summary()
-
 train_features, train_labels = extract_features(
     conv_base, train_generator, 2000
 )
@@ -72,9 +70,9 @@ test_features, test_labels = extract_features(
     conv_base, test_generator, 1000
 )
 
-train_features.reshape(2000, 4 * 4 * 512)
-validation_features.reshape(1000, 4 * 4 * 512)
-test_features.reshape(1000, 4 * 4 * 512)
+train_features = train_features.reshape(2000, 4 * 4 * 512)
+validation_features = validation_features.reshape(1000, 4 * 4 * 512)
+test_features = test_features.reshape(1000, 4 * 4 * 512)
 
 # Build the model
 model = models.Sequential()
