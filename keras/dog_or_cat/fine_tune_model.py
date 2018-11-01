@@ -74,7 +74,7 @@ history = model.fit_generator(
     validation_data=validation_generator,
     validation_steps=50,
 )
-model.save('catas_and_dogs_small_4.h5')
+model.save('catas_and_dogs_small_5.h5')
 
 # Visualize the performance
 plot_loss_and_accuracy(history)
