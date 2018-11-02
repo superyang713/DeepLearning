@@ -8,10 +8,12 @@ from tensorflow.keras.preprocessing import image
 from utils import save_fig
 
 
-model = load_model('models/catas_and_dogs_small_2.h5')
+model_path = '/home/yang/Code/deeplearning/keras/dog_or_cat/models/'
+model_path += 'catas_and_dogs_small_2.h5'
+model = load_model(model_path)
 
-img_path = \
-    '/home/yang/Code/deeplearning/keras/dog_or_cat/data/test/cats/cat.1700.jpg'
+img_path = '/home/yang/Code/deeplearning/keras/dog_or_cat/data/test/cats/'
+img_path += 'cat.1700.jpg'
 img = image.load_img(img_path, target_size=(150, 150))
 img_tensor = image.img_to_array(img)
 img_tensor = np.expand_dims(img_tensor, axis=0)
