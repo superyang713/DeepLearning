@@ -43,7 +43,7 @@ validation_generator = test_datagen.flow_from_directory(
     class_mode='binary',
 )
 # Load model
-model = models.load_model('catas_and_dogs_small_4.h5')
+model = models.load_model('models/catas_and_dogs_small_4.h5')
 
 conv_base = model.get_layer(index=0)
 conv_base.trainable = True
