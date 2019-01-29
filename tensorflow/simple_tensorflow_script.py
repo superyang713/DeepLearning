@@ -5,7 +5,7 @@ import numpy as np
 
 n_inputs = 8 * 8
 n_hidden1 = 100
-n_hidden2 = 50
+n_hidexit(den2 = 50
 n_hidden3 = 20
 n_outputs = 10
 
